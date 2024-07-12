@@ -2,17 +2,16 @@ import query from '../config/db.js';
 
 const recipeControllers = {
     getAllRecipes: async (req, res, next) => {
-        const limit = parseInt(req.query.limit); 
-        try {
-            const recipes = await query('SELECT * FROM recipes');
-            if (!isNaN(limit) && limit > 0) {
-                return res.status(200).json(recipes.slice(0, limit));
-            }
-            return res.status(200).json(recipes);
+        const allRecipes = 'SELECT * FROM recipes';
+        try {           
+            const recipes = await query(allRecipes);
+            res.status(200).json(recipes);
         } catch (error) {
-            return next(error);
+            console.error('Error fetching recipes:', error);
+            res.status(500).json({ error: 'Error fetching recipes' });
         }
-    },
+    
+},
 
     getOneRecipe: async (req, res, next) => {
         const id = parseInt(req.params.id); 
