@@ -1,11 +1,16 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cookieParser from 'cookie-parser';
+
 
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import createUserTable from './models/user.js';
 import createRecipeTable from './models/recipe.js';
+
 
 // import routes
 import userRoutes from './routes/user.js';

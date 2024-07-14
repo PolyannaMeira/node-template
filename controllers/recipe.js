@@ -15,6 +15,11 @@ const recipeControllers = {
 
     getOneRecipe: async (req, res, next) => {
         const id = parseInt(req.params.id); 
+        if (isNaN(id)) {
+            const error = new Error('Invalid recipe ID');
+            error.status = 400;
+            return next(error);
+        }
         try {
             const [recipe] = await query('SELECT * FROM recipes WHERE id = ?', [id]);
 
@@ -53,6 +58,13 @@ const recipeControllers = {
 
     updateRecipe: async (req, res, next) => {
         const id = parseInt(req.params.id);
+
+        if (isNaN(id)) {
+            const error = new Error('Invalid recipe ID');
+            error.status = 400;
+            return next(error);
+        }
+
         const updatedRecipe = {
             title: req.body.title,
             ingredients: req.body.ingredients,
@@ -76,6 +88,12 @@ const recipeControllers = {
 
     deleteRecipe: async (req, res, next) => {
         const id = parseInt(req.params.id);
+
+        if (isNaN(id)) {
+            const error = new Error('Invalid recipe ID');
+            error.status = 400;
+            return next(error);
+        }
 
         try {
             const [result] = await query('DELETE FROM recipes WHERE id = ?', [id]);
