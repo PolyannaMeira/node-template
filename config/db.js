@@ -1,9 +1,11 @@
 import mysql from 'mysql2/promise';
-
 import dotenv from 'dotenv';
 
+
 // Carregar variáveis de ambiente do arquivo .env
+
 dotenv.config();
+
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -14,6 +16,7 @@ const pool = mysql.createPool({
 });
 
 console.log('MySQL Pool created successfully');
+
 
 // Create query
 const query = async (sql, values) => {

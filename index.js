@@ -16,6 +16,8 @@ import createRecipeTable from './models/recipe.js';
 import userRoutes from './routes/user.js';
 import recipeRoutes from './routes/recipe.js';
 
+
+
 // set port
 const PORT = process.env.PORT || 5009;
 
@@ -37,10 +39,10 @@ app.use(express.static(path.join(PATH, 'public')));
 // create tables
 createUserTable();
 createRecipeTable();
-
+ 
 // use routes
 app.use(userRoutes);
-app.use(recipeRoutes);
+app.use('/recipes', recipeRoutes);
 
 // error
 app.use((err, req, res, next) => {
